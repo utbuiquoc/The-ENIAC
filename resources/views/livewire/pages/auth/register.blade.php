@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
+use App\Http\Controllers\AuthorController;
 
 new #[Layout('layouts.guest')] class extends Component
 {
@@ -31,6 +32,7 @@ new #[Layout('layouts.guest')] class extends Component
         event(new Registered($user = User::create($validated)));
 
         Auth::login($user);
+        AuthorController::create($user);
 
         $this->redirect(route('dashboard', absolute: false), navigate: true);
     }

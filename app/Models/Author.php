@@ -36,8 +36,6 @@ class Author extends Model
         'email',
         'photo',
         'bio',
-        'github_handle',
-        'twitter_handle',
     ];
 
     /**
@@ -50,6 +48,11 @@ class Author extends Model
     public function photoUrl(): Attribute
     {
         return Attribute::get(fn () => $this->photo ? asset(Storage::url($this->photo)) : '');
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function posts(): HasMany

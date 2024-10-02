@@ -17,8 +17,11 @@ use Filament\Forms\Get;
 use Filament\Forms\Set;
 use App\Traits\HasContentEditor;
 
+use Illuminate\Support\Facades\Auth;
+
 use App\Models\Post;
 use App\Models\Author;
+
 
 use function now;
 
@@ -85,14 +88,17 @@ class PostResource extends Resource
 
                     Forms\Components\Select::make('author_id')
                         ->label(__('filament-blog.author'))
-                        ->relationship(name: 'author', titleAttribute: 'name')
-                        ->searchable()
+                        ->relationship(
+                            name: 'author', 
+                            titleAttribute: 'name',
+                            modifyQueryUsing: fn (Builder $query) => $query->where('user_id', '=', Auth::user()->id)
+                        )
+                        ->preload()
                         ->required(),
 
                     Forms\Components\Select::make('category_id')
                         ->label(__('filament-blog.category'))
                         ->relationship(name: 'category', titleAttribute: 'name')
-                        ->searchable()
                         ->required(),
 
                     Forms\Components\DatePicker::make('published_at')
@@ -203,21 +209,21 @@ class PostResource extends Resource
         return ['title', 'slug', 'author.name', 'category.name'];
     }
 
-    // public static function getGlobalSearchResultDetails(Model $record): array
-    // {
-    //     /** @var Post $record */
-    //     $details = [];
+    public static function getGlobalSearchResultDetails($record): array
+    {
+        /** @var Post $record */
+        $details = [];
 
-    //     if ($record->author) {
-    //         $details['Author'] = $record->author->name;
-    //     }
+        if ($record->author) {
+            $details['Author'] = $record->author->name;
+        }
 
-    //     if ($record->category) {
-    //         $details['Category'] = $record->category->name;
-    //     }
+        if ($record->category) {
+            $details['Category'] = $record->category->name;
+        }
 
-    //     return $details;
-    // }
+        return $details;
+    }
 
     public static function getPluralModelLabel(): string
     {
