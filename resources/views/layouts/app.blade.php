@@ -11,15 +11,15 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-50">
-            <div class="min-h-screen flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
-                <div class="relative h-svh w-full max-w-2xl px-6 lg:max-w-7xl">
-                    <header class="grid items-center">
-                        <livewire:welcome.navigation />
-                    </header>
+            <div class="min-h-screen flex flex-col items-center selection:bg-[#FF2D20] selection:text-white">
+                <header class="grid items-center w-full max-w-2xl px-6 lg:max-w-7xl">
+                    <livewire:welcome.navigation />
+                </header>
+
+                <div class="relative w-full">
 
                     <!-- Page Heading -->
                     @if (isset($header))
@@ -31,9 +31,11 @@
                     @endif
 
                     <!-- Page Content -->
-                    <main class="mt-6">
+                    <main class="">
                         {{ $slot }}
                     </main>
+
+                    <livewire:layout.footer />
                 </div>
             </div>
         </div>

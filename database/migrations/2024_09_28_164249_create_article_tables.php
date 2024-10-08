@@ -26,6 +26,7 @@ return new class extends Migration
                 table: 'users', indexName: 'id'   
             )->cascadeOnDelete();
             $table->string('name');
+            $table->string('slug');
             $table->string('email')->unique();
             $table->string('photo')->nullable();
             $table->longText('bio')->nullable();

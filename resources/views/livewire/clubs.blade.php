@@ -1,4 +1,7 @@
+@assets
 <link rel="stylesheet" href="{{ asset('css/swiper.css') }}">
+<script src="{{ asset('js/swiper-bundle.min.js' )}}"></script>
+@endassets
 
 <div class="">
     <h1 class="text-5xl text-center mt-16 mb-32">CÁC CÂU LẠC BỘ</h1>
@@ -64,8 +67,9 @@
     </section>
 </div>
 
+@script
 <script>
-    var swiper = new Swiper(".mySwiper", {
+    new Swiper(".mySwiper", {
         effect: "coverflow",
         grabCursor: true,
         centeredSlides: true,
@@ -83,3 +87,4 @@
         }
     });
 </script>
+@endscript
