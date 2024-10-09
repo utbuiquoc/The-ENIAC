@@ -57,6 +57,6 @@ class Author extends Model
 
     public function posts(): HasMany
     {
-        return $this->hasMany(Post::class, 'author_id');
+        return $this->hasMany(Post::class, 'user_id');
     }
 }

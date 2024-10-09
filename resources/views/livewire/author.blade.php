@@ -8,7 +8,7 @@
         @foreach ($posts as $post)
             <livewire:author.card 
                 href="/post/{{ $post->slug }}"
-                image="{{ $post->banner }}"
+                image="{{ asset('storage/' .$post->banner) }}"
                 title="{{ $post->title }}"
                 content="{{ $post->excerpt }}"
                 class="col-span-2 [&:nth-child(1)]:col-span-3 [&:nth-child(2)]:col-span-3"

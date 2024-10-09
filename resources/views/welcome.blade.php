@@ -1,3 +1,10 @@
+<?php
+use App\Models\Post;
+
+$posts = Post::orderBy('id')->take(4)->get();
+
+// dd($posts[0]->title);
+?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -62,70 +69,23 @@
                         <h2 class="text-3xl font-bold">MULTIMEDIA VNG</h2>
                         <div class="grid gap-6 lg:grid-cols-5 lg:gap-5">
                             <div class="grid col-span-3">
-                                <div class="flex flex-col shadow-sm rounded-xl">
-                                    <img class="w-full h-auto rounded-t-xl" src="https://images.unsplash.com/photo-1680868543815-b8666dba60f7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=560&q=80" alt="Card Image">
-                                    <div class="p-4 md:p-5">
-                                        <h3 class="text-lg font-bold text-gray-800">
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, eius!
-                                        </h3>
-                                    </div>
-                                </div>
+                                <livewire:author.card 
+                                    href="/post/{{ $posts[0]->slug }}"
+                                    image="{{ asset('storage/' .$posts[0]->banner) }}"
+                                    title="{{ $posts[0]->title }}"
+                                    content="{{ $posts[0]->excerpt }}"
+                                />
                             </div>
 
                             <div class="grid gap-2 col-span-2 grid-rows-3">
-                                <div class="grid row-span-1">
-                                    <div class="rounded-xl shadow-sm sm:flex">
-                                        <div class="shrink-0 relative w-full rounded-t-xl overflow-hidden sm:rounded-s-xl sm:max-w-60 md:rounded-se-none md:max-w-48">
-                                            <img class="size-full absolute top-0 start-0 object-cover" src="https://images.unsplash.com/photo-1680868543815-b8666dba60f7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=560&q=80" alt="Card Image">
-                                        </div>
-                                        <div class="flex flex-wrap">
-                                            <div class="p-4 flex flex-col h-full sm:px-6 sm:py-1">
-                                                <h3 class="text-lg font-bold text-gray-800">
-                                                    Card title
-                                                </h3>
-                                                <p class="mt-1 text-gray-500">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam placeat id veniam illum impedit provident.
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="grid row-span-1 gap-6">
-                                    <div class="rounded-xl shadow-sm sm:flex">
-                                        <div class="shrink-0 relative w-full rounded-t-xl overflow-hidden sm:rounded-s-xl sm:max-w-60 md:rounded-se-none md:max-w-48">
-                                            <img class="size-full absolute top-0 start-0 object-cover" src="https://images.unsplash.com/photo-1680868543815-b8666dba60f7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=560&q=80" alt="Card Image">
-                                        </div>
-                                        <div class="flex flex-wrap">
-                                            <div class="p-4 flex flex-col h-full sm:px-6 sm:py-1">
-                                                <h3 class="text-lg font-bold text-gray-800">
-                                                    Card title
-                                                </h3>
-                                                <p class="mt-1 text-gray-500">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam placeat id veniam illum impedit provident.
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                    
-                                <div class="grid row-span-1">
-                                    <div class="rounded-xl shadow-sm sm:flex">
-                                        <div class="shrink-0 relative w-full rounded-t-xl overflow-hidden sm:rounded-s-xl sm:max-w-60 md:rounded-se-none md:max-w-48">
-                                            <img class="size-full absolute top-0 start-0 object-cover" src="https://images.unsplash.com/photo-1680868543815-b8666dba60f7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=560&q=80" alt="Card Image">
-                                        </div>
-                                        <div class="flex flex-wrap">
-                                            <div class="p-4 flex flex-col h-full sm:px-6 sm:py-1">
-                                                <h3 class="text-lg font-bold text-gray-800">
-                                                    Card title
-                                                </h3>
-                                                <p class="mt-1 text-gray-500">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam placeat id veniam illum impedit provident.
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                @for ($i = 1; $i < 4; ++$i)
+                                    <livewire:author.card-horizontal
+                                        href="/post/{{ $posts[$i]->slug }}"
+                                        image="{{ asset('storage/' .$posts[$i]->banner) }}"
+                                        title="{{ $posts[$i]->title }}"
+                                        content="{{ $posts[$i]->excerpt }}"
+                                    />
+                                @endfor
                             </div>
                             <div class="grid col-span-2"></div>
                         </div>

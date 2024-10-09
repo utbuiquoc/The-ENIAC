@@ -15,8 +15,11 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Traits\HasContentEditor;
 
 use App\Models\Category;
+use App\Models\Author;
 use App\Filament\Resources\CategoryResource\Pages;
 use App\Filament\Resources\CategoryResource\RelationManagers;
+
+use Illuminate\Support\Facades\Auth;
 
 class CategoryResource extends Resource
 {
@@ -59,6 +62,7 @@ class CategoryResource extends Resource
                         Forms\Components\Toggle::make('is_visible')
                             ->label(__('filament-blog.visible_to_guests'))
                             ->default(true),
+                        
                     ])
                     ->columns([
                         'sm' => 2,
@@ -81,6 +85,7 @@ class CategoryResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(fn (Builder $query) => $query->where('user_id', Author::where('user_id', Auth::user()->id)->first()->id))
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->label(__('filament-blog.name'))

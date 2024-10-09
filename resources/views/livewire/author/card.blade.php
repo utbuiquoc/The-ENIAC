@@ -4,7 +4,7 @@
         <h3 class="text-lg font-bold text-gray-800 dark:text-white">
             {{ $title }}
         </h3>
-        <p class="mt-1 break-words text-gray-500 dark:text-neutral-400">
+        <p class="mt-1 break-words text-gray-500 dark:text-neutral-400 line-clamp-2">
             {{ $content }}
         </p>
         <p class="mt-5 text-xs text-gray-500 dark:text-neutral-500">

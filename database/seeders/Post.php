@@ -19,7 +19,7 @@ class Post extends Seeder
 
         for ($i = 0; $i < $limit; ++$i)
             DB::table('posts')->insert([
-                'author_id' => 4,
+                'author_id' => 1,
                 'title' => Str::random(10),
                 'slug' => Str::random(10),
                 'content' => Str::random(30),

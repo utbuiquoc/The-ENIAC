@@ -16,7 +16,7 @@ class Author extends Component
     {
         $this->author = $slug;
 
-        $this->author_row = Authors::where('name', $slug)->first();
+        $this->author_row = Authors::where('slug', $slug)->first();
         $this->posts = Post::where('author_id', '=', $this->author_row->id)->get();
     }
 

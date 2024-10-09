@@ -38,6 +38,7 @@ class Category extends Model
         'slug',
         'description',
         'is_visible',
+        'user_id',
     ];
 
     /**
@@ -50,6 +51,11 @@ class Category extends Model
     public function posts(): HasMany
     {
         return $this->hasMany(Post::class, 'category_id', 'id');
+    }
+
+    public function author_id(): BelongsTo
+    {
+        return $this->hasMany(User::class, 'id');
     }
 
     /**

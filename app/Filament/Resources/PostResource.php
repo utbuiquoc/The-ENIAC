@@ -131,6 +131,7 @@ class PostResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(fn (Builder $query) => $query->where('author_id', Author::where('user_id', Auth::user()->id)->first()->id))
             ->columns([
                 Tables\Columns\ImageColumn::make('banner')
                     ->label(__('filament-blog.banner'))

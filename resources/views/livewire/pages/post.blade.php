@@ -237,11 +237,16 @@ header, hgroup, menu, nav, section {
 .article #wrapper{overflow:hidden; /* overflow is important for grid. that way no need to use classes like .last, .end, .omega or wrap each row into a different container */}
 
 /* ============================ DEBUG ============================ */
+
+.article a {
+	color: #eb4432;
+	font-weight: bold;
+}
 </style>
 
 <div class="mt-12 flex flex-col items-center">
     {{-- Care about people's approval and you will be their prisoner. --}}
-    <div class="w-full px-6 max-w-2xl lg:max-w-7xl">
+    <div class="w-full max-w-2xl lg:max-w-4xl">
         <div class="">
             <h1 class="text-5xl font-bold">{{ $article->title }}</h1>
             <p class="mt-4">{{ $article->excerpt }}</p>
